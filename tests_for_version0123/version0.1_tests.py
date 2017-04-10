@@ -11,7 +11,7 @@ class TestDojo(TestCase):
         Dojo.create_room('Venus', 'O')
         self.assertTrue('VENUS' in Dojo.all_rooms)
         response = Dojo.create_room('VENUS', 'O')
-        self.assertEqual(response, "Room already exists")
+        self.assertEqual(response, "Room already exist")
 
     
 
