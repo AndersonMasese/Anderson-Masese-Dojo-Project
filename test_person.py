@@ -1,5 +1,5 @@
 """
-These unit test is modelled around a modelled project
+These unit test is modelled around a conceptualized project
 For example, andela_person will be a folder containing files such as person from which everything has been imported
 """
 import unittest
