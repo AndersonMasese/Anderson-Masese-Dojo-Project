@@ -1,2 +1,1 @@
-# Anderson-Masese-Dojo-Project
-Learning exercises for the Andela week 2 bootcamp
+For version 0, dojo.py implements the add_person functionality, driver.py starts the application on the cmd
