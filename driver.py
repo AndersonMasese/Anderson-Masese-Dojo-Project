@@ -1,15 +1,15 @@
 '''
 Usage:
-    add_person <person_name> <Fellow|Staff> [wants_room]
-    create_room <room_name> <room_type>
+    add_person <first_name> <last_name> <status> [--wants_accomodation=N]
+    create_room <room_type> <room_name>
     
+    quit
 Options:
-    -h, --help  Show this screen and exit
-    -i --interactive  Interactive Mode
-    
+    --help  Show this screen and exi
+    --wants_accomodation=<N> [defult: N]
 '''
 
-from andela_person.Dojo import Dojo
+from app.dojo import Dojo
 import sys, cmd, os
 from termcolor import cprint, colored
 from pyfiglet import figlet_format
@@ -49,7 +49,7 @@ def docopt_cmd(func):
 border = colored("*" * 20, 'cyan').center(80)
 def introduction():
     print (border)
-    print ("WELCOME TO THE DOJO ROOM ALLOCATION!".center(70))
+    print ("WELCOME TO DOJO".center(70))
     print(__doc__)
     print (border)
 
@@ -59,28 +59,37 @@ def save_state_on_interrupt():
 
 
 class DojoApplication(cmd.Cmd):
-    cprint(figlet_format('WELCOME TO THE DOJO', font='banner3-D'), 'cyan', attrs=['bold'])
+    cprint(figlet_format('THE DOJO', font='banner3-D'), 'cyan', attrs=['bold'])
 
-    prompt = "Dojo >>>"
+    prompt = "dojo>>"
 
-   
+    @docopt_cmd
+    def do_create_room(self, arg):
+        '''Usage: create_room <room_type> <room_name>...'''
+        room_type = arg["<room_type>"]
+        room_name=arg["<room_name>"]
+        Dojo.create_room(room_type, room_name)
 
     @docopt_cmd
     def do_add_person(self, arg):
-        '''Usage: add_person <FELLOW|STAFF> [wants_accommodation]  '''
+        '''Usage: add_person <firstname> <lastname> <status> [--wants_accomodation=N] '''
 
-        name = arg["<firstname>"]
-        fellowstaff = arg["<lastname>"]
+        first_name = arg["<firstname>"]
+        last_name = arg["<lastname>"]
+        pos = arg["<status>"]
         wants_accomodation = arg["--wants_accomodation"]
-        Dojo.add_person(name, fellowstaff,str(wants_accomodation))
-    @docopt_cmd
-    def create_room(self, arg):
-        '''Usage: create_room <room_name> <room_type>'''
-        room_name = arg["<room_name>"]
-        room_type = arg["<room_type>"]
-        Dojo.create_room(room_name.upper(), room_type.upper())
+        Dojo.add_person(first_name, last_name, pos.upper(), str(wants_accomodation))
+
+    
 
    
+
+    @docopt_cmd
+    def do_quit(self, arg):
+        '''Usage: quit '''
+        print("EXITED")
+        exit()
+
 
 if __name__ == '__main__':
     introduction()
