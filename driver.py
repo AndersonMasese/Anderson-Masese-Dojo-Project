@@ -1,7 +1,7 @@
 '''
 Usage:
     add_person <person_id> <first_name> <last_name> <F|S> [--wants_accomodation=N]
-    create_room <room_name> <room_type>
+    create_room <room_type> <room_name>
     Usage: reallocate_person <firstname> <lastname> <new_room_name>
     load_people <filename>
     print_allocations [--o=filename]
@@ -67,7 +67,7 @@ class DojoApplication(cmd.Cmd):
 
     @docopt_cmd
     def do_create_room(self, arg):
-        '''Usage: create_room <room_type> <room_name>'''
+        '''Usage: create_room <room_type> <room_name>...'''
         room_name = arg["<room_name>"]
         room_type = arg["<room_type>"]
         Dojo.create_room(room_type, room_name)
