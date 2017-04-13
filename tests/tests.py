@@ -11,24 +11,24 @@ class TestDojo(TestCase):
 
     def test_create_office(self):
         previous_room_count = len(Dojo.all_rooms)
-        self.assertFalse('Venus' in Dojo.all_rooms)
-        Dojo.create_room('Venus', 'OFFICE')
-        self.assertTrue('Venus'.upper() in Dojo.all_rooms)
+        self.assertFalse('saturn' in Dojo.all_rooms)
+        Dojo.create_room('office', 'saturn')
+        self.assertTrue('saturn'.upper() in Dojo.all_rooms)
         new_room_count = len(Dojo.all_rooms)
         self.assertEqual(previous_room_count + 1, new_room_count)
 
     def test_create_ls(self):
         previous_room_count = len(Dojo.all_rooms)
-        self.assertFalse('Ruby' in Dojo.all_rooms)
-        Dojo.create_room('Ruby', 'LIVINGSPACE')
-        self.assertTrue('Ruby'.upper() in Dojo.all_rooms)
+        self.assertFalse('zebaki' in Dojo.all_rooms)
+        Dojo.create_room('livingspace', 'zebaki')
+        self.assertTrue('zebaki'.upper() in Dojo.all_rooms)
         new_room_count = len(Dojo.all_rooms)
         self.assertEqual(previous_room_count + 1, new_room_count)
 
     def test_room_does_not_exist(self):
-        Dojo.create_room('Venus', 'O')
-        self.assertTrue('VENUS' in Dojo.all_rooms)
-        response = Dojo.create_room('VENUS', 'O')
+        Dojo.create_room('office', 'zebaki')
+        self.assertTrue('venus' in Dojo.all_rooms)
+        response = Dojo.create_room('office', 'venus')
         self.assertEqual(response, "Room already exists")
 
     
